@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ThirdPlace — Brooklyn &amp; Westchester Discovery</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">3P</span>
+        <div>
+          <h1>ThirdPlace</h1>
+          <p class="subtitle">Brooklyn &amp; Westchester Freshness-Verified Directory</p>
+        </div>
+      </div>
+
+      <div class="region-switcher" role="group" aria-label="Region filter">
+        <button class="chip-btn active" data-region="">All Regions</button>
+        <button class="chip-btn" data-region="brooklyn">Brooklyn, NY</button>
+        <button class="chip-btn" data-region="westchester">Westchester, NY</button>
+      </div>
+
+      <nav class="view-tabs" aria-label="View switch">
+        <button class="tab-btn active" data-tab="explore">Explore Places</button>
+        <button class="tab-btn" data-tab="queue">
+          Needs Verification <span id="queue-badge" class="badge">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <section id="filter-bar" class="filter-bar">
+      <label class="select-wrap">
+        <span>Category</span>
+        <select id="filter-category">
+          <option value="">All Categories</option>
+          <option value="cafe">Cafe</option>
+          <option value="library">Library</option>
+          <option value="public_plaza">Public Plaza</option>
+          <option value="community_space">Community Space</option>
+          <option value="park">Park</option>
+          <option value="coworking_space">Coworking Space</option>
+        </select>
+      </label>
+
+      <label class="toggle-chip">
+        <input type="checkbox" id="filter-wifi" />
+        <span>Wi-Fi Required</span>
+      </label>
+      <label class="toggle-chip">
+        <input type="checkbox" id="filter-outlets" />
+        <span>Outlets Available</span>
+      </label>
+      <label class="toggle-chip">
+        <input type="checkbox" id="filter-laptop" />
+        <span>Laptop-Friendly</span>
+      </label>
+      <label class="toggle-chip">
+        <input type="checkbox" id="filter-hide-stale" />
+        <span>Hide Stale (&lt;40% conf)</span>
+      </label>
+    </section>
+
+    <main id="explore-view" class="workspace">
+      <section class="map-panel">
+        <div class="panel-header">
+          <h2>Spatial Map</h2>
+          <div class="legend">
+            <span><i class="dot fresh"></i>Fresh</span>
+            <span><i class="dot aging"></i>Aging</span>
+            <span><i class="dot stale"></i>Stale</span>
+            <span><i class="dot suspected_closed"></i>Suspected Closed</span>
+          </div>
+        </div>
+        <div class="map-container">
+          <svg id="spatial-map" viewBox="0 0 640 480" role="img" aria-label="Regional places map"></svg>
+        </div>
+      </section>
+
+      <section class="list-panel">
+        <div class="panel-header">
+          <h2>Places (<span id="places-count">0</span>)</h2>
+        </div>
+        <div id="places-list" class="places-list"></div>
+      </section>
+
+      <aside id="detail-panel" class="detail-panel empty">
+        <div id="detail-content">
+          <p class="empty-state">Select a place on the map or list to inspect attribute freshness and submit 1-tap micro-verifications.</p>
+        </div>
+      </aside>
+    </main>
+
+    <main id="queue-view" class="queue-workspace hidden">
+      <div class="panel-header">
+        <h2>Prioritized Reverification Queue</h2>
+        <p class="subtitle">Contested and aging/stale attributes sorted by urgency</p>
+      </div>
+      <div id="queue-list" class="queue-list"></div>
+    </main>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
